@@ -1,4 +1,4 @@
-import requests  
+import requests
 import datetime
 
 class BotHandler:
@@ -38,13 +38,13 @@ pp_file = open("pp", "r")
 for line in pp_file.readlines():
     pps[line.split(',')[0]] = line.split(',')[1]
 pp_file.close()
-gary_bot = BotHandler(token)  
+gary_bot = BotHandler(token)
 greetings = ('hello', 'hi', 'greetings', 'sup')
 pps = {}
 now = datetime.datetime.now()
 
 
-def main():  
+def main():
     new_offset = None
     today = now.day
     hour = now.hour
@@ -64,13 +64,13 @@ def main():
             today += 1
 
         elif last_chat_text.lower() in greetings and today == now.day and 12 <= hour < 17:
-            greet_bot.send_message(last_chat_id, 'Good Afternoon {}'.format(last_chat_name))
+            gary_bot.send_message(last_chat_id, 'Good Afternoon {}'.format(last_chat_name))
             today += 1
 
         elif last_chat_text.lower() in greetings and today == now.day and 17 <= hour < 23:
             gary_bot.send_message(last_chat_id, 'Good Evening  {}'.format(last_chat_name))
             today += 1
-            
+
         elif last_chat_text.lower().startswith('.pp '):
             ppd = last_chat_text.lower()[4:]
             if ppd in pps:
@@ -81,7 +81,7 @@ def main():
 
         new_offset = last_update_id + 1
 
-if __name__ == '__main__':  
+if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
